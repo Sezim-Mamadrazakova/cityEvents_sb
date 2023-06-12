@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Place</th>
+    <th>Date</th>
+    <th>time</th>
+    <th>duration</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="p:${events}">
+        <td th:text="${p.getId()}"/>
+        <td th:text="${p.getEventName()}"/>
+        <td th:text="${p.getEventPlace()}"/>
+        <td th:text="${p.getDateStart()}"/>
+        <td th:text="${p.getTimeStart()}"/>
+        <td th:text="${p.getDurationEvent()}"/>
+
+
+    </tr>
+
+    </tbody>
+
+</table>
+
+
+</body>
+</html>
