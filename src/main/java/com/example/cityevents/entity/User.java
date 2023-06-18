@@ -22,12 +22,12 @@ import java.util.List;
 @AllArgsConstructor
 public class User implements UserDetails {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String userName;
     private String email;
     private String password;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private City city;
     @Enumerated(EnumType.STRING)
     private Role role;

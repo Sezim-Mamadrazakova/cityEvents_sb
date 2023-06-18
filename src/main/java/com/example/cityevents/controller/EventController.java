@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @RestController
-//@RequestMapping("/event")
+@RequestMapping("/api/event")
 public class EventController {
 
     private final EventService eventService;
@@ -23,8 +23,8 @@ public class EventController {
     public EventController(EventService eventService) {
         this.eventService = eventService;
     }
-    @GetMapping("/event")
-    @Secured("User")
+    @GetMapping("/all")
+
     public String showAllEvent(Model model){
         model.addAttribute("events", eventService.findAll());
        return "events";

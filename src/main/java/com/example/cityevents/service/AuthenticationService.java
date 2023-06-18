@@ -3,6 +3,7 @@ package com.example.cityevents.service;
 import com.example.cityevents.entity.AuthenticationRequest;
 import com.example.cityevents.entity.AuthenticationResponse;
 import com.example.cityevents.entity.RegisterRequest;
+import com.example.cityevents.entity.User;
 import com.example.cityevents.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

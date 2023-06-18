@@ -13,10 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
 
-
-
-
-
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -37,6 +33,14 @@ public class UserService implements UserDetailsService {
         if(user==null){
             throw new UsernameNotFoundException(String.format("User %s is not found", email));
         }
-        return (UserDetails) user;
+
+        UserDetails userDetails=User.builder()
+                .userName(user.getUsername())
+                .email(user.getEmail())
+                .city(user.getCity())
+                .password(user.getPassword())
+                .role(user.getRole())
+                .build();
+        return userDetails;
     }
 }

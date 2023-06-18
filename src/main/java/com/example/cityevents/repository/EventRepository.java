@@ -9,5 +9,5 @@ import java.util.Optional;
 public interface EventRepository extends JpaRepository<Event, Long> {
 
     Event findByEventName(String name);
-    List<Event> findAll();
+
 }

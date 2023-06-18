@@ -16,7 +16,7 @@ public class AuthController{
     public AuthController(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
     }
-    @Secured("ROLE_USER")
+
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(
             @RequestBody RegisterRequest request
