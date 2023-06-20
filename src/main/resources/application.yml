@@ -6,3 +6,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/city_events
     username: postgres
     password: 12345678
+  cache:
+    cache-names: event, user
+    caffeine:
+      spec: maximumSize=100, expireAfterAccess=60m
