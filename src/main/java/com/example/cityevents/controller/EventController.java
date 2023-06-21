@@ -2,6 +2,8 @@ package com.example.cityevents.controller;
 
 import com.example.cityevents.entity.Event;
 import com.example.cityevents.service.EventService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,8 @@ public class EventController {
     public EventController(EventService eventService) {
         this.eventService = eventService;
     }
+    @Operation(summary = "Getting all events")
+    @ApiResponse(responseCode = "200", description = "OK")
     @GetMapping("/all")
     @Cacheable()
     public ResponseEntity<List<Event>> findAll(){
@@ -39,6 +43,9 @@ public class EventController {
         }
 
     }
+    @Operation(summary = "Getting event by name")
+    @ApiResponse(responseCode = "200", description = "OK")
+    @ApiResponse(responseCode = "404", description = "Event not found")
     @GetMapping("/{eventName}")
     @Cacheable(key="#eventName")
     public ResponseEntity <Event> getByEventName(@PathVariable("eventName") String eventName){
@@ -57,6 +64,8 @@ public class EventController {
         }
 
     }
+    @Operation(summary = "Create event ")
+    @ApiResponse(responseCode = "201", description = "OK")
     @PostMapping("/create")
     public ResponseEntity<Event> createEvent(@RequestBody Event event){
         log.info("Creating new event: {}",event);
@@ -68,6 +77,9 @@ public class EventController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+    @Operation(summary = "Deleting event by name")
+    @ApiResponse(responseCode = "204", description = "OK")
+    @ApiResponse(responseCode = "404", description = "Event not found")
     @DeleteMapping("/delete/{id}")
     @CacheEvict(key="#id")
     public ResponseEntity<Void> deleteEvent(@PathVariable Long id){
@@ -80,17 +92,7 @@ public class EventController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-//    @PutMapping("/update")
-//    public ResponseEntity<Event> updateEvent(@RequestBody Event event){
-//        log.info("Updating event by name: {}", event.getEventName());
-//        try{
-//            eventService.update(event);
-//            return ResponseEntity.ok(event);
-//        }catch (Exception e){
-//            log.error("Event not updated");
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-//        }
-//    }
+
 
 
 

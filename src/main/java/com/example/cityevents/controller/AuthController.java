@@ -5,6 +5,8 @@ import com.example.cityevents.entity.AuthenticationResponse;
 import com.example.cityevents.entity.RegisterRequest;
 import com.example.cityevents.exeption.ResourceNotFoundException;
 import com.example.cityevents.service.AuthenticationService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheConfig;
@@ -23,7 +25,8 @@ public class AuthController{
     public AuthController(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
     }
-
+    @Operation(summary = "Register user ")
+    @ApiResponse(responseCode = "201", description = "OK")
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(
             @RequestBody RegisterRequest request
@@ -38,7 +41,9 @@ public class AuthController{
 
 
     }
-
+    @Operation()
+    @ApiResponse(responseCode = "200", description = "OK")
+    @ApiResponse(responseCode = "404", description = "User not found")
     @PostMapping("/authenticate")
 
     public ResponseEntity<AuthenticationResponse> authenticate(
