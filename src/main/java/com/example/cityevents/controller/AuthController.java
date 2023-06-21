@@ -4,6 +4,8 @@ import com.example.cityevents.entity.AuthenticationRequest;
 import com.example.cityevents.entity.AuthenticationResponse;
 import com.example.cityevents.entity.RegisterRequest;
 import com.example.cityevents.service.AuthenticationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/v1/auth")
 
 public class AuthController{
+    Logger log= LoggerFactory.getLogger(AuthController.class);
     private final AuthenticationService authenticationService;
 
     public AuthController(AuthenticationService authenticationService) {
@@ -24,7 +27,14 @@ public class AuthController{
     public ResponseEntity<AuthenticationResponse> register(
             @RequestBody RegisterRequest request
     ){
-        return ResponseEntity.ok(authenticationService.register(request));
+        log.info("Getting register user");
+        try{
+            return ResponseEntity.ok(authenticationService.register(request));
+        }catch (Exception e){
+            log.error("User not registered");
+            throw e;
+        }
+
 
     }
 
@@ -33,7 +43,14 @@ public class AuthController{
     public ResponseEntity<AuthenticationResponse> authenticate(
             @RequestBody AuthenticationRequest request
     ){
-        return ResponseEntity.ok(authenticationService.authenticated(request));
+        log.info("Getting authenticate user");
+        try{
+            return ResponseEntity.ok(authenticationService.authenticated(request));
+        }catch (Exception e){
+            log.error("User not authenticated");
+            throw e;
+        }
+
     }
 
 }
