@@ -22,13 +22,19 @@ public class EventService {
         this.eventRepository = eventRepository;
     }
 
-    public Optional<Event> findByEventName(final String eventName) {
+    public Event findByEventName(final String eventName) {
         log.info("Getting event by name: "+eventName);
-        return Optional.ofNullable(eventRepository.findByEventName(eventName)
-                .orElseThrow(() -> {
-                    log.error("Event not found for name: {}" , eventName);
-                    return new ResourceNotFoundException("Event not found");
-                }));
+        try{
+            log.error("Event not found for name: {}" , eventName);
+            return eventRepository.findByEventName(eventName);
+        }catch (Exception e){
+            throw e;
+        }
+//        return Optional.ofNullable(eventRepository.findByEventName(eventName)
+//                .orElseThrow(() -> {
+//                    log.error("Event not found for name: {}" , eventName);
+//                    return new ResourceNotFoundException("Event not found");
+//                }));
     }
 
     public List<Event> findAll() {
@@ -37,7 +43,7 @@ public class EventService {
             return eventRepository.findAll();
         }catch (Exception e){
             log.error("Events not found");
-            throw new ResourceNotFoundException("Events not found");
+            throw e;
         }
     }
     public Event save(Event event){

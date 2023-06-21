@@ -41,11 +41,11 @@ public class EventController {
     }
     @GetMapping("/{eventName}")
     @Cacheable(key="#eventName")
-    public ResponseEntity<Optional<Event>> getByEventName(@PathVariable("eventName") String eventName){
+    public ResponseEntity <Event> getByEventName(@PathVariable("eventName") String eventName){
         log.info("Getting event by name: {}", eventName);
         try{
-            Optional<Event> event= eventService.findByEventName(eventName);
-            if(event.isPresent()){
+            Event event= eventService.findByEventName(eventName);
+            if(event!=null){
                 return  ResponseEntity.ok(event);
             }
             else {

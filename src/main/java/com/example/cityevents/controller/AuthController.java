@@ -3,6 +3,7 @@ package com.example.cityevents.controller;
 import com.example.cityevents.entity.AuthenticationRequest;
 import com.example.cityevents.entity.AuthenticationResponse;
 import com.example.cityevents.entity.RegisterRequest;
+import com.example.cityevents.exeption.ResourceNotFoundException;
 import com.example.cityevents.service.AuthenticationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

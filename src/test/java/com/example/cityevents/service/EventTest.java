@@ -21,9 +21,9 @@ public class EventTest {
         String name="ABS";
         Event event=new Event();
         event.setEventName(name);
-        when(eventRepository.findByEventName(name)).thenReturn(Optional.of(event));
-        Optional<Event> result=eventService.findByEventName(name);
-        Assertions.assertEquals(event, result.get());
+        when(eventRepository.findByEventName(name)).thenReturn(event);
+        Event result=eventService.findByEventName(name);
+        Assertions.assertEquals(event, result);
 
     }
     @Test

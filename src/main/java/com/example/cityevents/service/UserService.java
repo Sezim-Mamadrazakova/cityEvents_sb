@@ -25,20 +25,32 @@ public class UserService implements UserDetailsService {
     }
     public User findByUserName(String userName){
         log.info("Getting user by name: "+userName);
-        return userRepository.findByUserName(userName)
-                .orElseThrow(()->{
-                    log.error("User not found for name {}",userName);
-                    return new ResourceNotFoundException("User not found");
-                });
+        try{
+            return userRepository.findByUserName(userName);
+        }catch (Exception e){
+            log.error("User not found for name {}",userName);
+            throw e;
+        }
+//        return userRepository.findByUserName(userName)
+//                .orElseThrow(()->{
+//                    log.error("User not found for name {}",userName);
+//                    return new ResourceNotFoundException("User not found");
+//                });
 
     }
     public User findByEmail(String email){
         log.error("Getting user by email: "+email);
-        return userRepository.findByEmail(email)
-                .orElseThrow(()->{
-                    log.error("User not found for email: {}",email);
-                    return new ResourceNotFoundException("User not found");
-                });
+        try{
+            return userRepository.findByEmail(email);
+        }catch (Exception e){
+            log.error("User not found for email {}",email);
+            throw e;
+        }
+//        return userRepository.findByEmail(email)
+//                .orElseThrow(()->{
+//                    log.error("User not found for email: {}",email);
+//                    return new ResourceNotFoundException("User not found");
+//                });
     }
 
 

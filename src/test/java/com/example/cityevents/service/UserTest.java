@@ -27,7 +27,7 @@ public class UserTest {
     void findByEmailTest(){
         String email="diana@gmail.com";
         User user=new User(351L,"Diana",email,"7654",Moscow,Role.User);
-        when(userRepository.findByEmail(email)).thenReturn(Optional.of(user));
+        when(userRepository.findByEmail(email)).thenReturn(user);
         UserService userService=new UserService(userRepository);
         User result=userService.findByEmail(email);
         Assertions.assertEquals(user, result);
@@ -37,7 +37,7 @@ public class UserTest {
     void findByUserNameTest(){
         String userName="Diana";
         User user=new User(351L,"Diana","diana@gmail.com","7654",Moscow,Role.User);
-        when(userRepository.findByUserName(userName)).thenReturn(Optional.of(user));
+        when(userRepository.findByUserName(userName)).thenReturn(user);
         UserService userService=new UserService(userRepository);
         User result=userService.findByUserName(userName);
         Assertions.assertEquals(user, result);
@@ -47,7 +47,7 @@ public class UserTest {
     void loadUserByUserNameTest(){
         String email="diana@gmail.com";
         User user=new User(351L,"Diana",email,"7654",Moscow,Role.User);
-        when(userRepository.findByEmail(email)).thenReturn(Optional.of(user));
+        when(userRepository.findByEmail(email)).thenReturn(user);
         UserService userService=new UserService(userRepository);
         UserDetails userDetails=userService.loadUserByUsername(email);
         Assertions.assertEquals(email,userDetails.getUsername());
